@@ -1,0 +1,27 @@
+{
+    "owner_qq": {
+        "description": "允许查询系统信息的管理员 QQ",
+        "type": "string",
+        "default": "",
+        "hint": "仅此 QQ 发送触发词可查看系统信息，其他人会收到友好提示。为空时所有人都无法查看。",
+        "obvious_hint": true
+    },
+    "sysinfo_triggers": {
+        "description": "系统信息查询触发词",
+        "type": "list",
+        "default": ["sysinfo", "系统信息"],
+        "hint": "精确匹配整条消息（不区分大小写），无需 / 前缀、无需 @ 机器人。"
+    },
+    "no_permission_reply": {
+        "description": "无权限用户查询时的回复",
+        "type": "string",
+        "default": "调用系统 API 失败，请稍后再试～",
+        "hint": "默认措辞不暴露权限逻辑，避免让查询者尴尬。"
+    },
+    "disk_path": {
+        "description": "磁盘占用率统计路径",
+        "type": "string",
+        "default": "",
+        "hint": "留空自动选择：Linux/macOS 用 /，Windows 用系统盘（如 C:\\）。"
+    }
+}

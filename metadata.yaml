@@ -1,0 +1,6 @@
+name: astrbot_plugin_monitor
+display_name: 系统信息查询与 ping 测试
+desc: 发送「sysinfo」查询服务器系统信息（仅限配置的管理员 QQ，跨平台支持 Windows/Linux/macOS），发送「ping」测试机器人回复延迟。触发词等均可在面板配置。
+version: v1.3.0
+author: xiaohao234
+repo: https://github.com/xiaohao234/astrbot_plugin_monitor
