@@ -85,8 +85,11 @@ class MonitorPlugin(Star):
         text = event.message_str.strip().lower()
         if text not in self._triggers:
             return  # 不是查询关键词，正常放行，不干预其它流程
-        # 命中关键词：抑制默认 LLM，避免 @机器人 时 AI 也跟着回复
-        event.should_call_llm(False)
+        # 命中关键词：抑制默认 LLM，避免 @机器人 时 AI 也跟着回复。
+        # 注意 should_call_llm 的参数含义是“是否禁止默认 LLM 请求”（见
+        # AstrBot astr_message_event.py 的 docstring 与 ProcessStage 的
+        # `not event.call_llm` 判定），传 True 才是拦截。
+        event.should_call_llm(True)
         sender_id = event.get_sender_id()
         if sender_id != self._owner_qq:
             # 非管理员：友好回复，不暴露权限逻辑
@@ -206,7 +209,7 @@ class MonitorPlugin(Star):
         # 平台时间戳只有秒级整精度，无法做亚秒级计时；
         # 这里用高精度单调时钟测量机器人内部回复延迟。
         start = time.perf_counter()
-        event.should_call_llm(False)  # 抑制默认 LLM，避免 AI 也跟着回复
+        event.should_call_llm(True)  # 抑制默认 LLM（True=禁止），避免 AI 也跟着回复
         elapsed_ms = (time.perf_counter() - start) * 1000  # 转为毫秒
         # 不足 0.01 毫秒时显示下限，避免显示 0.00
         if elapsed_ms < 0.01:
